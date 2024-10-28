@@ -146,7 +146,7 @@ class DefiLlamaAPI:
 
                 chain_data.append(
                     {
-                        "coin": coin_data["name"],
+                        "name": coin_data["name"],
                         "symbol": coin_data["symbol"],
                         "chain": chain,
                         "current": current,
