@@ -10,7 +10,7 @@ class DefiLlamaAPIError(Exception):
     pass
 
 
-class DefiLlamaAPI:
+class StableLlamaAPI:
     """A Python wrapper for the DefiLlama API"""
 
     BASE_DOMAIN = "llama.fi"
@@ -37,9 +37,7 @@ class DefiLlamaAPI:
         self.name = name
         self.endpoint = endpoint
         self.timeout = timeout
-        self.base_url = (
-            f"https://{self.name}.{self.BASE_DOMAIN}/{self.endpoint}?includePrices=true"
-        )
+        self.base_url = f"https://{self.name}.{self.BASE_DOMAIN}"
 
     def _make_request(
         self, endpoint: str, params: Optional[Dict[str, Any]] = None
@@ -194,6 +192,11 @@ class DefiLlamaAPI:
                 .alias("change_24h_pct"),
             ]
         )
+
+    def get_a_stablecoin(self, id: int):
+        data = self._make_request(endpoint=f"stablecoin/{id}")
+
+        return data
 
     def _handle_error(self, message: str) -> None:
         """
